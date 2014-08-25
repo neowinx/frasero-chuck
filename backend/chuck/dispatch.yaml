@@ -1,0 +1,5 @@
+application: big-crow-677
+
+dispatch:
+  - url: "*/"
+    module: default
