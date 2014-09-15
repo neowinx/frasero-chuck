@@ -1,4 +1,4 @@
-package com.example.david.papa;
+package py.com.codelab.android.fraserochuck;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.david.papa.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

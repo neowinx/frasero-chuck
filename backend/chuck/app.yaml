@@ -1,5 +1,5 @@
 application: big-crow-677
-version: 1
+version: 1.1.0
 runtime: go
 api_version: go1
 
