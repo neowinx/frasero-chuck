@@ -2,6 +2,7 @@ package chuck
  
 import (
 	"fmt"
+	"math/rand"
 	"encoding/json"
 	"net/http"
 	"appengine"
@@ -75,7 +76,7 @@ func frases(w http.ResponseWriter, r *http.Request) {
 
 	initData(c, w, frases)
 
-	b, err := json.Marshal(frases)
+	b, err := json.Marshal(frases[rand.Intn(len(frases))])
 	if err != nil {
 		c.Errorf("Error en conversión del Json. %v", err)
 		return
