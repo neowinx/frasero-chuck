@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +32,11 @@ import java.io.InputStreamReader;
 
 public class ChuckMainActivity extends Activity {
 
-    private static final String BASE_ADDR = "http://192.168.43.184:8081/frases/";
+    private static final String BASE_ADDR = "https://big-crow-677.appspot.com/frases/";
     TextView tv;
     EditText edFrase;
     EditText edUsuario;
+    ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class ChuckMainActivity extends Activity {
         setContentView(R.layout.activity_my);
         final Button btnOtra = (Button)findViewById(R.id.btnOtra);
         tv = (TextView)findViewById(R.id.textView);
+        pb = (ProgressBar)findViewById(R.id.spinnerFetchingData);
         btnOtra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,9 +75,11 @@ public class ChuckMainActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     btnAgregar.setPressed(true);
-                    new AgregarFraseTask().execute(BASE_ADDR + "/add");
+                    new AgregarFraseTask().execute(BASE_ADDR + "add");
                 }
             });
+        } else if (id == R.id.action_about) {
+            setContentView(R.layout.about);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -132,11 +137,17 @@ public class ChuckMainActivity extends Activity {
             return result;
         }
 
+        @Override
+        protected void onPreExecute() {
+            pb.setVisibility(ProgressBar.VISIBLE);
+        }
+
         // This is called when doInBackground() is finished
         protected void onPostExecute(String result) {
             //showNotification("Downloaded " + result + " bytes");
             Log.i("Resultado:", result);
             tv.setText(result);
+            pb.setVisibility(ProgressBar.INVISIBLE);
         }
 
     }
@@ -153,11 +164,14 @@ public class ChuckMainActivity extends Activity {
 
             try {
 
-                httppost.setEntity(new StringEntity("{" +
+                String str = "{" +
                         "\"LaFrase\":\"" + edFrase.getText() + "\"," +
                         "\"Usuario\":\"" + edUsuario.getText() + "\"," +
-                        "\"Ip\":\"notimpementedyet\"," +
-                        "}"));
+                        "\"Ip\":\"notimpementedyet\"" +
+                        "}";
+
+                httppost.setEntity(new StringEntity(str));
+                httppost.addHeader("Content-Type", "application/json");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -194,10 +208,11 @@ public class ChuckMainActivity extends Activity {
 
         protected void onPostExecute(String result) {
             Log.i("Resultado:", result);
-            if(result.contains("Se inserto correctamente"))
+            if(result.contains("Se inserto correctamente")) {
+                Toast.makeText(getApplicationContext(), "Frase insertada. :)", Toast.LENGTH_LONG).show();
                 setContentView(R.layout.activity_my);
-            else
-                Toast.makeText(getApplicationContext(), "Error al insertar la frase. Vuelva a intentarlo por favor.", Toast.LENGTH_LONG);
+            } else
+                Toast.makeText(getApplicationContext(), "Error al insertar la frase. Vuelva a intentarlo por favor.", Toast.LENGTH_LONG).show();
         }
 
     }

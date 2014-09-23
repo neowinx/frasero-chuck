@@ -4,6 +4,6 @@
     <string name="app_name">Chuck</string>
     <string name="hello_world">Chuck dice...</string>
     <string name="action_add_frase">Agregar Frase</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_about">Acerca de...</string>
 
 </resources>
