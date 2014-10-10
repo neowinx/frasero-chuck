@@ -17,8 +17,9 @@ type Frase struct {
 
 func init() {
 	http.HandleFunc("/", handleStart)
-    http.HandleFunc("/frases/", frases)
+  http.HandleFunc("/frases/", frases)
 	http.HandleFunc("/frases/add", frasesAdd)
+	http.HandleFunc("/frases/all", frasesall)
 }
  
 func handleStart(w http.ResponseWriter, r *http.Request) {
@@ -83,6 +84,34 @@ func frases(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	fmt.Fprintln(w, string(b))
+
+}
+
+func frasesall(w http.ResponseWriter, r *http.Request) {
+
+	c := appengine.NewContext(r)
+
+	// This query it's not optimized, it should bing only the keys, not all the data
+	q := datastore.NewQuery("Frase")
+
+	var frases []Frase
+	if _, err := q.GetAll(c, &frases); err != nil {
+		c.Errorf("Error al obtener las frases desde el datastore. %v", err)
+	}
+
+	initData(c, w, frases)
+
+	b, err := json.Marshal(frases)
+	if err != nil {
+		c.Errorf("Error en conversión del Json. %v", err)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	fmt.Fprintln(w, string(b))
 
