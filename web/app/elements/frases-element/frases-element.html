@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../frases-api/frases-api.html">
+<link rel="import" href="../frase-card-element/frase-card-element.html">
 
 <polymer-element name="frases-element" attributes="">
   
@@ -10,11 +11,12 @@
     <frases-api id="service" frases="{{frases}}"></frases-api>
     
     <div layout vertical center>
-      
       <template repeat="{{frase in frases}}">
-        <h2>{{post}}</h2>
+        <frase-card-element>
+          <p>{{frase.LaFrase}}</p>
+          <p>{{frase.Usuario}}</p>
+        </frase-card-element>
       </template>
-
     </div>
 
   </template>
