@@ -22,3 +22,6 @@
       width: 400px;
     }
   }
+  core-input[multiline] {
+    border: 1px dotted #ccc;
+  }
