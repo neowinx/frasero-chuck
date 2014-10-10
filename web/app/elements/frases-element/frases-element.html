@@ -1,17 +1,26 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../frases-api/frases-api.html">
 
 <polymer-element name="frases-element" attributes="">
+  
   <template>
+
     <link rel="stylesheet" href="frases-element.css">
+    
+    <frases-api id="service" frases="{{frases}}"></frases-api>
+    
+    <div layout vertical center>
+      
+      <template repeat="{{frase in frases}}">
+        <h2>{{post}}</h2>
+      </template>
+
+    </div>
+
   </template>
   <script>
-    (function () {
-      'use strict';
-
-      Polymer({
-        // define element prototype here
-      });
-
-    })();
+  Polymer({
+    // define element prototype here
+  });
   </script>
 </polymer-element>

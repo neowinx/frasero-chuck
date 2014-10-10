@@ -1,0 +1,30 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="frases-api" attributes="frases">
+  
+  <template>
+    <style>
+    :host {
+      display: none;
+    }
+    </style>
+    <core-ajax id="ajax"
+      auto
+      url="http://big-crow-677.appspot.com/frases"
+      on-core-response="{{postsLoaded}}"
+      handleAs="json">
+    </core-ajax>
+  </template>
+
+  <script>
+    Polymer('frases-api', {
+      created: function() {
+        this.frases = [];
+      },
+      postsLoaded: function() {
+        this.frases = this.$.ajax.response.slice(0);
+      }
+    });
+  </script>
+</polymer-element>
