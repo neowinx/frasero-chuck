@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="frases-add-api" attributes="addDialog lafrase elusuario">
+  
+  <template>
+    <style>
+    :host {
+      display: none;
+    }
+    </style>
+    <core-ajax id="addajax"
+      method="POST" url="http://localhost:8080/frases/add"
+      body='{"LaFrase":"{{lafrase}}","Usuario":"{{elusuario}}"}'
+      on-core-response="{{responseOk}}"
+      on-core-error="{{responseErr}}">
+    </core-ajax>
+  </template>
+
+  <script>
+    Polymer('frases-add-api', {
+      responseOk: function() {
+        this.addDialog.toggle();
+        alert('Frase guardada');
+      },
+      responseErr: function() {
+        alert('Error al guardar');
+      },
+      llamar: function() {
+        this.$.addajax.go();
+      }
+    });
+  </script>
+</polymer-element>

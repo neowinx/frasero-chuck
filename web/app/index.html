@@ -21,19 +21,21 @@
 
 <body unresolved>
 
-  <paper-dialog id="nueva-frase-dialog" heading="Dialog" transition="paper-dialog-transition-bottom">
+  <frases-add-api id="addservice" addDialog="{{nueva-frase-dialog}}" lafrase="{{laFrase}}" elusuario="{{elUsuario}}"></frases-add-api>
+
+  <paper-dialog id="nueva-frase-dialog" heading="Nueva Frase" transition="paper-dialog-transition-bottom">
 
     <div class="container">
       
-      
-      <core-input placeholder="Ingrese la frase..." flex autofocus multiline rows="3"></core-input>
+      <core-input placeholder="Ingrese la frase..." flex autofocus multiline rows="3">{{laFrase}}</core-input>
 
-      <core-input placeholder="Autor..." flex>
+      <core-input placeholder="Autor..." flex>{{elUsuario}}</core-input>
 
     </div>
 
     <paper-button raised dismissive>Cerrar</paper-button>
-    <paper-button raised affirmative>Aceptar</paper-button>
+    <paper-button raised affirmative onclick="{{handleAddFrase}}">Aceptar</paper-button>
+
   </paper-dialog>
 
   <core-header-panel>
