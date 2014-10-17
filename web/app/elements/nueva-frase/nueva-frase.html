@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog-transition.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/core-input/core-input.html">
+<link rel="import" href="../frases-api/frases-add-api.html">
+
+<polymer-element name="nueva-frase">
+  <template>
+    <link rel="stylesheet" href="nueva-frase.css">
+
+    <frases-add-api id="frasesAddApi" 
+      lafrase="{{lafrase}}" 
+      elusuario="{{elusuario}}"
+      on-frase-add-ok="{{fraseAgregada}}"></frases-add-api>
+
+    <paper-toast id="toastNuevaFraseAgregada" text="Frase guardada correctamente."></paper-toast>
+    <paper-toast id="toastErrorNuevaFrase" role="alert" text="Error al guardar frase."></paper-toast>
+
+    <paper-dialog id="nuevaFraseDialog" heading="Nueva Frase" transition="paper-dialog-transition-bottom">
+      <div class="container">
+        <core-input placeholder="Ingrese la frase..." flex autofocus multiline rows="3" value="{{lafrase}}"></core-input>
+        <core-input placeholder="Autor..." flex value="{{elusuario}}"></core-input>
+      </div>
+
+      <paper-button raised dismissive>Cerrar</paper-button>
+      <paper-button raised on-click="{{agregarFrase}}">Aceptar</paper-button>
+      <paper-button raised on-click="{{verValores}}">Ver Valores</paper-button>
+
+    </paper-dialog>
+
+  </template>
+  <script>
+    Polymer('nueva-frase',{
+      open: function() {
+        if(this.$.nuevaFraseDialog.opened == false) {
+          this.$.nuevaFraseDialog.toggle();
+        }
+      },
+      agregarFrase: function(event, detail, sender) {
+        this.$.frasesAddApi.guardar();
+      },
+      fraseAgregada: function(event, detail, sender) {
+        this.$.nuevaFraseDialog.toggle();
+        this.$.toastNuevaFraseAgregada.show();
+        this.fire('frase-agregada');
+      },
+      verValores: function(event, detail, sender) {
+        this.$.toastNuevaFraseAgregada.show();
+      }
+    });
+  </script>
+</polymer-element>

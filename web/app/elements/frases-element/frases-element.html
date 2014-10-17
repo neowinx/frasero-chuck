@@ -2,7 +2,7 @@
 <link rel="import" href="../frases-api/frases-api.html">
 <link rel="import" href="../frase-card-element/frase-card-element.html">
 
-<polymer-element name="frases-element" noscript>
+<polymer-element name="frases-element">
   
   <template>
 
@@ -10,8 +10,8 @@
     
     <frases-api id="service" frases="{{frases}}"></frases-api>
     
-    <div layout vertical center>
-      <template repeat="{{frase in frases}}">
+    <div id="idFrases" layout vertical center>
+      <template id="templateFrases" repeat="{{frase in frases}}">
         <frase-card-element>
           <p>{{frase.LaFrase}}</p>
           <p>{{frase.Usuario}}</p>
@@ -20,4 +20,28 @@
     </div>
 
   </template>
+
+  <script>
+    Polymer('frases-element', {
+      frases: [],
+      frasesChanged: function() {
+        console.log('frasesChanged()');
+        this.$.idFrases.getElementsByTagName('template')[0].iterator_.updateIteratedValue();
+      },
+      loadFrases: function(e, d, s) {
+        console.log('loadFrases()');
+        this.$.service.load();
+        //template.iterator_.updateIteratedValue();
+      },
+      responseOk: function() {
+        console.log('responseOk()');
+        this.fire('frases-ok');
+      },
+      responseErr: function() {
+        console.log('responseErr()');
+        this.fire('frases-err');
+      }
+    });
+  </script>
+
 </polymer-element>

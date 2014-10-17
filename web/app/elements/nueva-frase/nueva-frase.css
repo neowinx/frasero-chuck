@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+.container {
+  width: 80%;
+  margin: 50px auto;
+}
+@media (min-width: 481px) {
+  .container {
+    width: 400px;
+  }
+}
+core-input[multiline] {
+  border: 1px dotted #ccc;
+}

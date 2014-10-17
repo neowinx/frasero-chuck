@@ -23,7 +23,12 @@
         this.frases = [];
       },
       postsLoaded: function() {
+        console.log('postsLoaded()');
         this.frases = this.$.ajax.response.slice(0);
+      },
+      load: function() {
+        console.log('load()');
+        this.$.ajax.go();
       }
     });
   </script>

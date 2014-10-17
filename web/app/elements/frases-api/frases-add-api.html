@@ -1,7 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 
-<polymer-element name="frases-add-api" attributes="addDialog lafrase elusuario">
+<polymer-element name="frases-add-api" attributes="lafrase elusuario">
   
   <template>
     <style>
@@ -19,14 +19,17 @@
 
   <script>
     Polymer('frases-add-api', {
+      ready: function() {
+        this.lafrase = '';
+        this.elusuario = 'Anonimo';
+      },
       responseOk: function() {
-        this.$.addDialog.toggle();
-        alert('Frase guardada');
+        this.fire('frase-add-ok');
       },
       responseErr: function() {
-        alert('Error al guardar');
+        this.fire('frase-add-err');
       },
-      llamar: function() {
+      guardar: function() {
         this.$.addajax.go();
       }
     });

@@ -21,27 +21,12 @@
 
 <body unresolved>
 
-  <frases-add-api addDialog="{{nueva-frase-dialog}}" lafrase="{{laFrase}}" elusuario="{{elUsuario}}"></frases-add-api>
-
-  <paper-dialog id="nueva-frase-dialog" heading="Nueva Frase" transition="paper-dialog-transition-bottom">
-
-    <div class="container">
-      
-      <core-input placeholder="Ingrese la frase..." flex autofocus multiline rows="3">{{laFrase}}</core-input>
-
-      <core-input placeholder="Autor..." flex>{{elUsuario}}</core-input>
-
-    </div>
-
-    <paper-button raised dismissive>Cerrar</paper-button>
-    <paper-button raised affirmative onclick="loco()">Aceptar</paper-button>
-
-  </paper-dialog>
+  <nueva-frase></nueva-frase>
 
   <core-header-panel>
 
     <core-toolbar>
-      <paper-button onclick="document.querySelector('paper-dialog[id=nueva-frase-dialog]').toggle()">Insertar Frase</paper-button>
+      <paper-button onclick="document.querySelector('nueva-frase').open()">Insertar Frase</paper-button>
     </core-toolbar>
 
     <div class="container" layout vertical center>
