@@ -20,7 +20,7 @@
   <script>
     Polymer('frases-add-api', {
       responseOk: function() {
-        this.addDialog.toggle();
+        this.$.addDialog.toggle();
         alert('Frase guardada');
       },
       responseErr: function() {

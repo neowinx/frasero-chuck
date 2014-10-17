@@ -21,7 +21,7 @@
 
 <body unresolved>
 
-  <frases-add-api id="addservice" addDialog="{{nueva-frase-dialog}}" lafrase="{{laFrase}}" elusuario="{{elUsuario}}"></frases-add-api>
+  <frases-add-api addDialog="{{nueva-frase-dialog}}" lafrase="{{laFrase}}" elusuario="{{elUsuario}}"></frases-add-api>
 
   <paper-dialog id="nueva-frase-dialog" heading="Nueva Frase" transition="paper-dialog-transition-bottom">
 
@@ -34,7 +34,7 @@
     </div>
 
     <paper-button raised dismissive>Cerrar</paper-button>
-    <paper-button raised affirmative onclick="{{handleAddFrase}}">Aceptar</paper-button>
+    <paper-button raised affirmative onclick="loco()">Aceptar</paper-button>
 
   </paper-dialog>
 

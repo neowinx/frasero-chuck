@@ -137,6 +137,8 @@ func frasesAdd(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	fmt.Fprintln(w, "Se inserto correctamente")
 
 }
