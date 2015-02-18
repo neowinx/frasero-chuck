@@ -11,7 +11,7 @@ Instructions
 ```bash
 goapp serve dispatch.yaml chuck/chuck.yaml
 ```
-3. Access [http://localhost:8080](http://localhost:8080) to access the app
+3. Access [http://localhost:8080](http://localhost:8080) to preview the app
 
 - **http://localhost:8080/frases/add**: Add a new frase.
 - **http://localhost:8080/frases**: List a random quote from the list of frases.
